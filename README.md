@@ -2,15 +2,15 @@
 
 ## Installation
 
-##### Installation des `node_modules` :
+#### Installation des `node_modules` :
 ```
 npm install
 ```
 
-##### Env
+#### Env
 Créer un fichier `.env` et ajouter le `TOKEN` du bot. Voir exemple du fichier `.env.sample`.
 
-**Démarrer le bot**
+#### Démarrer le bot
 ```
 npm start
 ```
