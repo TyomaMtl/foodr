@@ -1,0 +1,28 @@
+{
+  "restaurant": [
+    {
+      "id": 1,
+      "title": "Otacos"
+    },
+    {
+      "id": 2,
+      "title": "Infintea"
+    },
+    {
+      "id": 3,
+      "title": "Sushi"
+    },
+    {
+      "id": 4,
+      "title": "le boulanger"
+    },
+    {
+      "id": 5,
+      "title": "Mcdo"
+    }
+  ],
+  "user": {
+    "name": "typicode"
+  },
+  "count": 0
+}
