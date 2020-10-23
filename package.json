@@ -6,8 +6,7 @@
   "dependencies": {
     "discord.js": "^12.4.0",
     "dotenv": "^8.2.0",
-    "lowdb": "^1.0.0",
-    "mysql": "^2.18.1"
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
