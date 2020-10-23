@@ -14,7 +14,6 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-
 client.on('message', msg => {
     if (msg.author.bot) return;
     // if (!msg.content.startsWith(prefix)) return;
@@ -23,14 +22,9 @@ client.on('message', msg => {
     // const command = args.shift().toLowerCase();
 
     const getId = db.get('restaurant').value();
-    const item = getId[Math.floor(Math.random() * getId.length)];
-    const getRestau = item.title;
-    console.log(getRestau);
-
     // A garder pour ajoutez le restaurant sur la BD
-    
-    // const getLastId = db.get('restaurant').takeRight(1).value();
 
+    // const getLastId = db.get('restaurant').takeRight(1).value();
     // db.get('restaurant')
     //   .push({ id: getLastId + 1, title: 'Mcdo'})
     //   .write();
@@ -41,7 +35,13 @@ client.on('message', msg => {
 
     const str = msg.content.replace(/\s/g, '');
     if (str == "j'aifaim") {
-        msg.reply(`, tu peux manger chez ${getRestau}`);
+        if (getId.length > 0) {
+            const item = getId[Math.floor(Math.random() * getId.length)];
+            const getRestau = item.title;
+            msg.reply(`, tu peux manger chez ${getRestau}`);
+        } else {
+            msg.reply(`Mmmmh, j'espère que tu n'as pas trop faim`);
+        }
     }
 });
 
