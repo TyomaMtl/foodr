@@ -14,8 +14,10 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
+
 client.on('message', msg => {
     if (msg.author.bot) return;
+
     // if (!msg.content.startsWith(prefix)) return;
     // const commandBody = msg.content.slice(prefix.length);
     // const args = commandBody.split(' ');
@@ -38,9 +40,15 @@ client.on('message', msg => {
         if (getId.length > 0) {
             const item = getId[Math.floor(Math.random() * getId.length)];
             const getRestau = item.title;
-            msg.reply(`, tu peux manger chez ${getRestau}`);
+
+            if (msg.channel.type === 'dm') {
+                msg.reply(`${msg.author.username}, tu peux manger chez ${getRestau}`);
+            } else {
+                msg.reply(`, tu peux manger chez ${getRestau}`);
+            }
+
         } else {
-            msg.reply(`Mmmmh, j'espère que tu n'as pas trop faim`);
+            msg.reply(`Mmmmh, j'espère que tu n'as pas trop faim ${msg.author.username}`);
         }
     }
 });
