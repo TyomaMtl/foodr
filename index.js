@@ -10,14 +10,31 @@ client.on('ready', () => {
 client.on('message', msg => {
     if (msg.author.bot) return;
 
-    const str = msg.content.replace(/\s/g, '');
+    const str = msg.content
+    const getIdRestau = db.get('restaurant').value();
+    const getIdHelp = dbhelp.get('help').value();
+    const getLastRestaurantId = db.get('restaurant').takeRight(1).value()[0].id;
+
+    let askPersistRestaurant = '(nouveau|new|ajoute) resto, (.*), ([0-9]*)'
+    let result = str.match(askPersistRestaurant)
+    if (result) {
+        let key = result[1]
+        let restaurant = result[2]
+        let budget = result[3]
+        if (key == 'nouveau' || 'new' || 'ajoute' && restaurant != null && budget != null) {
+            db.get('restaurant')
+                .push({ id: getLastRestaurantId + 1, title: restaurant, budget: budget })
+                .write()
+        
+            msg.reply('bien ajouté mon pote !')
+        }
+    }
 
     if (msg.content === "ping") {
         msg.reply(`pas pong`);
     }
 
-
-    if (str == "j'aifaim") {
+    if (str == "j'ai faim") {
         db.getRestaurants((restaurants) => {
             const keys = Object.keys(restaurants)
 
@@ -38,7 +55,6 @@ client.on('message', msg => {
             }
         });
     }
-
 
     if (str == "foodrhelp") {
         db.getHelp((help) => {
