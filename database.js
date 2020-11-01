@@ -1,13 +1,14 @@
+require('dotenv').config()
 var firebase = require('firebase');
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBr07l2YU1TruCveOnxhGX5E4nVxET8i9A",
-    authDomain: "foodr-4c359.firebaseapp.com",
-    databaseURL: "https://foodr-4c359.firebaseio.com",
-    projectId: "foodr-4c359",
-    storageBucket: "foodr-4c359.appspot.com",
-    messagingSenderId: "453351847109",
-    appId: "1:453351847109:web:0e2de7db12fe1266016cac"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);
