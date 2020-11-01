@@ -11,26 +11,21 @@ client.on('message', msg => {
     if (msg.author.bot) return;
 
     const str = msg.content
-    const getIdRestau = db.get('restaurant').value();
-    const getIdHelp = dbhelp.get('help').value();
-    const getLastRestaurantId = db.get('restaurant').takeRight(1).value()[0].id;
 
     let askPersistRestaurant = '(nouveau|new|ajoute) resto, (.*), ([0-9]*)'
     let result = str.match(askPersistRestaurant)
     if (result) {
-        let key = result[1]
-        let restaurant = result[2]
+        let keyword = result[1]
+        let name = result[2]
         let budget = result[3]
-        if (key == 'nouveau' || 'new' || 'ajoute' && restaurant != null && budget != null) {
-            db.get('restaurant')
-                .push({ id: getLastRestaurantId + 1, title: restaurant, budget: budget })
-                .write()
-        
-            msg.reply('bien ajouté mon pote !')
+        if (keyword == 'nouveau' || 'new' || 'ajoute' && name != null && budget != null) {
+            db.addRestaurant(name, budget, () => {
+                msg.reply('bien ajouté mon pote !')
+            })
         }
     }
 
-    if (msg.content === "ping") {
+    if (str === "ping") {
         msg.reply(`pas pong`);
     }
 
@@ -50,7 +45,7 @@ client.on('message', msg => {
                     msg.reply(`${msg.author.username}, tu peux manger chez ${restau.name} pour ${restau.budget}€`);
                 }
                 else {
-                    msg.reply(`, tu peux manger chez ${restau.name} pour ${restau.budget}€`);
+                    msg.reply(`tu peux manger chez ${restau.name} pour ${restau.budget}€`);
                 }
             }
         });

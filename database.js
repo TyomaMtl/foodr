@@ -61,4 +61,4 @@ function getHelp(completion) {
     })
 }
 
-export default { addRestaurant, getRestaurants, updateRestaurants, setHelp, getHelp }
+module.exports = { addRestaurant, getRestaurants, updateRestaurants, setHelp, getHelp }
