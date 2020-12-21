@@ -45,7 +45,8 @@ client.on('message', msg => {
                     msg.reply(`${msg.author.username}, tu peux manger chez ${restau.name} pour ${restau.budget}€`);
                 }
                 else {
-                    msg.reply(`tu peux manger chez ${restau.name} pour ${restau.budget}€`);
+                    msg.reply(`Quel est ton budget stp?`);
+                    // msg.reply(`tu peux manger chez ${restau.name} pour ${restau.budget}€`);
                 }
             }
         });
