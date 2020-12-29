@@ -13,6 +13,7 @@ client.on('message', msg => {
     const str = msg.content
 
     let askPersistRestaurant = '(nouveau|new|ajoute) resto, (.*), ([0-9]*)'
+    let phrases = ['Mange de l\'eau', 'Mange de la salade', 'Mange des cailloux','Mange pas'];  
     let result = str.match(askPersistRestaurant)
     if (result) {
         let keyword = result[1]
@@ -42,15 +43,47 @@ client.on('message', msg => {
                 const restau = restaurants[key]
 
                 if (msg.channel.type === 'dm') {
-                    msg.reply(`${msg.author.username}, tu peux manger chez ${restau.name} pour ${restau.budget}€`);
+                    msg.reply(`Quel est ton budget stp?`);
                 }
                 else {
-                    msg.reply(`tu peux manger chez ${restau.name} pour ${restau.budget}€`);
+                    msg.reply(`Quel est ton budget stp?`);
+                    // msg.reply(`tu peux manger chez ${restau.name} pour ${restau.budget}€`);
                 }
             }
         });
     }
+    if(str.includes("€")){
+        var matches = str.match(/(\d+)/); 
+        db.getRestaurants((restaurants) => {
+            const keys = Object.keys(restaurants)
+            console.log(restaurants)
 
+                for (const element in restaurants) {
+                    console.log(restaurants[element].budget)
+                        if(restaurants[element].budget < matches[0]){
+                            var restau = restaurants[element];
+                        }
+                }
+             
+                const index = Math.floor(Math.random() * keys.length)
+                const key = keys[index]
+                if(restau){
+                    if (msg.channel.type === 'dm') {
+                        msg.reply(`${msg.author.username}, tu peux manger chez ${restau.name} pour ${restau.budget}€`);
+                    }
+                    else {
+                        msg.reply(`tu peux manger chez ${restau.name} pour ${restau.budget}€`);
+                    }
+                }else{
+                    msg.reply(` ,tu peux manger de l'eau !`);
+                }
+                
+        });
+    }
+    if(str == "Je n'ai pas faim"){
+        msg.reply(phrases[Math.floor(Math.random() * phrases.length)]);
+    }
+    
     if (str == "foodrhelp") {
         db.getHelp((help) => {
             msg.reply(help);
